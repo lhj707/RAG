@@ -24,7 +24,7 @@ def main():
     page_title="privateGPT",
     page_icon=":lock:")
 
-    st.title(":supervillain: private: red[GPT]")
+    st.title(":supervillain: private :red[GPT]")
 
     if "conversation" not in st.session_state:
         st.session_state.conversation = None
