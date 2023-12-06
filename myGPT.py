@@ -1,3 +1,17 @@
+!pip install streamlit
+!pip install tiktoken
+!pip install pysqlite3-binary
+!pip install langchain
+!pip install chromadb
+!pip install unstructured
+!pip install sentence-transformers
+!pip install faiss-cpu
+!pip install tiktoken
+!pip install openai
+!pip install pypdf
+!pip install loguru
+!pip install docx2txt
+
 import streamlit as st
 import tiktoken
 from loguru import logger
