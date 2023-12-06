@@ -53,7 +53,7 @@ def main():
 
     if 'messages' not in st.session_state:
         st.session_state['messages'] = [{"role": "assistant", 
-                                        "content": ":wave: 안녕하세요! 무엇이든 물어보세요! :point_left: 좌측 sidebar 문서 업로드 먼저!"}]
+                                        "content": "안녕하세요! 무엇이든 물어보세요! :point_left: 좌측 sidebar 문서 업로드 먼저!"}]
 
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
