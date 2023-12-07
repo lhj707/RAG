@@ -21,7 +21,7 @@ from langchain.memory import StreamlitChatMessageHistory
 
 def main():
     st.set_page_config(
-    page_title="privateGPT",
+    page_title="sysnovaGPT",
     page_icon=":supervillain:")
 
     st.title(":supervillain: sysnova :violet[GPT]")
