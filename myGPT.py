@@ -24,7 +24,7 @@ def main():
     page_title="sysnovaGPT",
     page_icon=":supervillain:")
 
-    st.title(":supervillain: sysnova :blue[private] :violet[GPT]")
+    st.title(":supervillain: sysnova :red[private] :violet[GPT]")
 
     if "conversation" not in st.session_state:
         st.session_state.conversation = None
@@ -62,7 +62,7 @@ def main():
     history = StreamlitChatMessageHistory(key="chat_messages")
 
     # Chat logic
-    if query := st.chat_input(":studio_microphone: 질문을 입력해주세요."):
+    if query := st.chat_input("질문을 입력해주세요."):
         st.session_state.messages.append({"role": "user", "content": query})
 
         with st.chat_message("user"):
