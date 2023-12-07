@@ -21,10 +21,10 @@ from langchain.memory import StreamlitChatMessageHistory
 
 def main():
     st.set_page_config(
-    page_title="enterpriseGPT",
+    page_title="privateGPT",
     page_icon=":supervillain:")
 
-    st.title(":supervillain: enterprise :violet[GPT]")
+    st.title(":supervillain: sysnova :violet[GPT]")
 
     if "conversation" not in st.session_state:
         st.session_state.conversation = None
@@ -38,7 +38,7 @@ def main():
     with st.sidebar:
         uploaded_files =  st.file_uploader("Upload your file",type=['pdf','docx'],accept_multiple_files=True)
         openai_api_key = st.secrets["openai_api_key"]
-        process = st.button("Process")
+        process = st.button("submit")
     if process:
         #if not openai_api_key:
             #st.info("Please add your OpenAI API key to continue.")
@@ -53,7 +53,7 @@ def main():
 
     if 'messages' not in st.session_state:
         st.session_state['messages'] = [{"role": "assistant", 
-                                        "content": "안녕하세요! 무엇이든 물어보세요! :point_left: 좌측 sidebar 문서 업로드 먼저!"}]
+                                        "content": "무엇이든 물어보세요! :point_left: 좌측 sidebar 문서 upload 먼저!"}]
 
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
@@ -79,7 +79,7 @@ def main():
                 source_documents = result['source_documents']
 
                 st.markdown(response)
-                with st.expander("참고 자료 및 원천 확인"):
+                with st.expander("참고 자료 및 내용 확인"):
                     for doc in source_documents:
                         st.markdown(doc.metadata['source'], help = doc.page_content)
 
