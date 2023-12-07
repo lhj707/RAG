@@ -38,7 +38,7 @@ def main():
     with st.sidebar:
         uploaded_files =  st.file_uploader("Upload your file",type=['pdf','docx'],accept_multiple_files=True)
         openai_api_key = st.secrets["openai_api_key"]
-        process = st.button("submit")
+        process = st.button("Submit")
     if process:
         #if not openai_api_key:
             #st.info("Please add your OpenAI API key to continue.")
