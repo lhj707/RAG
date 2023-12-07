@@ -21,10 +21,10 @@ from langchain.memory import StreamlitChatMessageHistory
 
 def main():
     st.set_page_config(
-    page_title="privateGPT",
+    page_title="enterpriseGPT",
     page_icon=":supervillain:")
 
-    st.title(":supervillain: private! :violet[GPT]")
+    st.title(":supervillain: enterprise :violet[GPT]")
 
     if "conversation" not in st.session_state:
         st.session_state.conversation = None
@@ -79,7 +79,7 @@ def main():
                 source_documents = result['source_documents']
 
                 st.markdown(response)
-                with st.expander("참고 문서 확인"):
+                with st.expander("참고 자료 및 원천 확인"):
                     for doc in source_documents:
                         st.markdown(doc.metadata['source'], help = doc.page_content)
 
