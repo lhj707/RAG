@@ -36,9 +36,42 @@ def main():
         st.session_state.processComplete = None
 
     with st.sidebar:
-        uploaded_files =  st.file_uploader("Upload your file",type=['pdf','docx'],accept_multiple_files=True)
+        uploaded_files = st.file_uploader("Upload your file", type=['pdf', 'docx'], accept_multiple_files=True)
         openai_api_key = st.secrets["openai_api_key"]
         process = st.button("Submit")
+
+        # new 벡터와 메타데이터 생성 및 다운로드 코드
+        if st.button("Generate and Download TSV Files"):
+            if uploaded_files:
+                documents = get_text(uploaded_files)  # 파일에서 텍스트 추출
+                chunks = get_text_chunks(documents)  # 텍스트를 청크로 분할
+                vectordb = get_vectorstore(chunks)  # 청크에서 벡터 생성
+
+                # 벡터와 메타데이터 DataFrame으로 변환
+                df_vectors = pd.DataFrame([doc.embedding for doc in vectordb.documents])
+                df_metadata = pd.DataFrame([{'Title': doc.title, 'Text': doc.text[:100] + '...'} for doc in vectordb.documents])
+
+                # TSV 형식으로 변환
+                tsv_vectors = df_vectors.to_csv(sep='\t', index=False, header=False)
+                tsv_metadata = df_metadata.to_csv(sep='\t', index=False, header=True)
+
+                # Streamlit 다운로드 버튼 추가
+                st.download_button(
+                    label="Download Vectors TSV",
+                    data=tsv_vectors,
+                    file_name="vectors.tsv",
+                    mime="text/tsv"
+                )
+                st.download_button(
+                    label="Download Metadata TSV",
+                    data=tsv_metadata,
+                    file_name="metadata.tsv",
+                    mime="text/tsv"
+                )
+            else:
+                st.warning("파일을 먼저 업로드해주세요.")
+        # new 여기까지
+        
     if process:
         #if not openai_api_key:
             #st.info("Please add your OpenAI API key to continue.")
