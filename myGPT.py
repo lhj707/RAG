@@ -96,17 +96,17 @@ def main():
         st.session_state.messages.append({"role": "assistant", "content": response})
 
 # 사용자 지정 토크나이저 로드 (예: Hugging Face에서 호스팅되는 토크나이저)
-custom_tokenizer = AutoTokenizer.from_pretrained("lhj707/biz2vec")
+# custom_tokenizer = AutoTokenizer.from_pretrained("lhj707/biz2vec")
 
-def custom_tokenizer_len(text):
-    # 텍스트를 토큰화하고 토큰의 길이를 반환
-    tokens = custom_tokenizer.encode(text, add_special_tokens=False)
-    return len(tokens)
-
-#def tiktoken_len(text):
-#    tokenizer = tiktoken.get_encoding("cl100k_base")
-#    tokens = tokenizer.encode(text)
+#def custom_tokenizer_len(text):
+#    # 텍스트를 토큰화하고 토큰의 길이를 반환
+#    tokens = custom_tokenizer.encode(text, add_special_tokens=False)
 #    return len(tokens)
+
+def tiktoken_len(text):
+    tokenizer = tiktoken.get_encoding("cl100k_base")
+    tokens = tokenizer.encode(text)
+    return len(tokens)
 
 def get_text(docs):
 
@@ -135,7 +135,7 @@ def get_text_chunks(text):
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=900,
         chunk_overlap=100,
-        length_function=custom_tokenizer_len
+        length_function=tiktoken_len
     )
     chunks = text_splitter.split_documents(text)
     return chunks
